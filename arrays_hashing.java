@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /* interview prep arrays and hasing neetcode + structy + ctci */
 
 public class arrays_hashing {
