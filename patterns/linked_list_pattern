@@ -1,0 +1,3 @@
+- use a dummy node to easily help you return your resultant list. it also helps you avoid the edge case of your intiial empty list. reduces the need for special case code for empty linked list. can ignore the edgecase of inserting into an empty list. 
+
+- in a doubly linked list, the dummy node is helpful, because we no longer have to keep track of seperate pointers for the head or tail of the linked list
