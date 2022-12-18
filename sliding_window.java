@@ -88,11 +88,9 @@ public class sliding_window {
             }
         }
 
-
         if(!paranStack.isEmpty()) return false;
 
         return true; 
     }
-
 
 }
