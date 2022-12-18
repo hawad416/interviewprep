@@ -12,7 +12,7 @@ lambda notation:  */
 - priority queue can be passed in a very elegant comparator that can make use of lambda functions, or you could pass in something else. The default priorityqueue is implemented as a MIN HEAP, so passing in comparator is necessary to transform it to the max heap and manipulate priority
         -    // reverse a and b in the compare since maxHeap */
         PriorityQueue<Integer> kQ = new PriorityQueue<>((a,b) -> Integer.compare(frequencyMap.get(b), frequencyMap.get(a)));
-        - PriorityQueue<Integer> kQ = new PriorityQueue<>(Collections.reverseOrder()) --> 
+        PriorityQueue<Integer> kQ = new PriorityQueue<>(Collections.reverseOrder());
     
                 
                 /*
@@ -25,7 +25,7 @@ lambda notation:  */
         } 
 
                           //  or: 
-        for(Map.Entry<Integer, Integer> entry){
+        for(Map.Entry<Integer, Integer> entry : x){
 
         }
 
@@ -37,6 +37,8 @@ lambda notation:  */
 
                 /*
 - convert string to a char array, then perform manipulations, then convert back to be more efficient and give yourself an easier time.
-    - */ string.toCharArray()
+    - */ 
+    string.toCharArray()
 
-- sliding window can kind of encompass the two pointer technique 
+    /* 
+- sliding window can kind of encompass the two pointer technique  */
