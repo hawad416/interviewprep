@@ -1,3 +1,63 @@
 public class linked_lists {
     
+    public static void main(String[] args) {
+        ListNode n = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+
+        reverseList(n);
+    }
+
+
+
+    /* reverse a linked list : https://leetcode.com/problems/reverse-linked-list/description/ */
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+    // reverse linked list iterative 
+
+    public static ListNode reverseList(ListNode head){
+
+        if(head == null) return head;
+
+        ListNode prev = null; // begins at null since first value should now be the last value which should point to null
+        ListNode curr = head; 
+        ListNode next = null;  // we set this at null instead of immediatley setting it to currrent.next because we can't guarantee that there exists a next value 
+
+
+        while(curr != null){    
+            next = curr.next;
+            curr.next = prev; 
+
+            prev = curr; 
+            curr = next; 
+        }
+
+
+        System.out.println(head.val);
+
+        head = prev; // we set head = to prev, because we will know that curr is now null, meaning the prev value is the last known concrete value 
+
+        return head;
+
+    }
+
+    // reverse linked list recursive 
+
+    public static ListNode reverseList1(ListNode head){
+
+        // 1 -> 2 -> 3 -> 4
+        //base case : 
+        if(head == null || head.next == null) return head; 
+
+        //split the list into two chunks
+        reverseList1(head.next);  // 2 -> 3 -> 4
+        head.next.next = head; 
+        head.next = null;
+
+        return head;
+    }
 }
