@@ -3,7 +3,6 @@ import java.util.Map;
 import java.util.Stack;
 
 public class stacks {
-    
 
     // valid  paranthesis: https://leetcode.com/problems/valid-parentheses/description/
     public static boolean isValid(String s){
@@ -18,11 +17,9 @@ public class stacks {
 
 
         for(int i = 0; i < s.length(); i++){
-
             if(paranMap.containsKey(s.charAt(i))){
                 paranStack.push(s.charAt(i));
-            } else{     
-                
+            } else{                 
                 if(paranStack.isEmpty()) return false; 
 
                 char mostRecentParan = paranStack.pop();
