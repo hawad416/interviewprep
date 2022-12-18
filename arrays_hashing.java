@@ -156,6 +156,10 @@ public class arrays_hashing {
         }
 
         return result;
+
+
+        // love is blind - netflix s3 
+        // write down vocab 
     }
 
     // need to start doing boundary edge cases or making assumptions. 
@@ -178,7 +182,7 @@ public class arrays_hashing {
                 frequencyMap.put(num, 1);
             }
         }
-        
+
         // reverse a and b in the compare since maxHeap
         PriorityQueue<Integer> kQ = new PriorityQueue<>((a,b) -> Integer.compare(frequencyMap.get(a), frequencyMap.get(b)));
         
