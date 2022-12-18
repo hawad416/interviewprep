@@ -1,3 +1,7 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 public class sliding_window {
     
     public static void main(String[] args){
@@ -7,7 +11,7 @@ public class sliding_window {
     
 
     // best time to buy and sell stock: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
-    
+
     // o(n^2) time complexity
     public static int maxProfit(int[] prices){
 
@@ -58,6 +62,37 @@ public class sliding_window {
         return max; 
     }
 
+
+    // valid  paranthesis: https://leetcode.com/problems/valid-parentheses/description/
+    public static boolean isValid(String s){
+        if(s == null) throw new IllegalArgumentException("string in invalid");
+
+        Map<Character, Character> paranMap = new HashMap<>();
+        Stack<Character> paranStack = new Stack<>();
+
+        paranMap.put('(', ')');
+        paranMap.put('{', '}');
+        paranMap.put('[', ']');
+
+
+        for(int i = 0; i < s.length(); i++){
+
+            if(paranMap.containsKey(s.charAt(i))){
+                paranStack.push(s.charAt(i));
+            } else{     
+                
+                if(paranStack.isEmpty()) return false; 
+
+                char mostRecentParan = paranStack.pop();
+                if(paranStack.get(mostRecentParan) != s.charAt(i)) return false;
+            }
+        }
+
+
+        if(!paranStack.isEmpty()) return false;
+
+        return true; 
+    }
 
 
 }
