@@ -2,9 +2,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.List;
 
 /* interview prep arrays and hasing neetcode + structy + ctci */
+
+/* First Attempt for all of these questions. Not currently too worried about performance. Will do a second attempt later */
 
 public class arrays_hashing {
     
@@ -20,6 +23,13 @@ public class arrays_hashing {
         list[5] = "bat";
 
         System.out.println(groupAnagrams(list));
+
+
+        int[] nums = new int[]{1,1,1,2,2,3};
+        System.out.println(Arrays.toString(topKFrequent2(nums, 2)));
+
+
+
     }
 
 
@@ -98,6 +108,98 @@ public class arrays_hashing {
         String tempStr = new String(tempArr);
 
         return tempStr;
+    }
+
+
+
+    //n log n becuase in this version i add all n keys to the queue 
+    public  int[] topKFrequent1(int[] nums, int k){
+
+        if(nums == null ) throw new IllegalArgumentException("invalid array passed in :( ");
+
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        int[] result = new int[k];
+
+        for(int num : nums){
+            if(frequencyMap.containsKey(num)){
+                frequencyMap.put(num, frequencyMap.get(num) + 1);
+            } else {
+                frequencyMap.put(num, 1);
+            }
+        }
+
+        //      int[] nums = new int[]{1,1,1,2,2,3};
+
+        System.out.println(frequencyMap);
+        
+
+        // reverse a and b in the compare since maxHeap
+        PriorityQueue<Integer> kQ = new PriorityQueue<>((a,b) -> Integer.compare(frequencyMap.get(b), frequencyMap.get(a)));
+        
+        // need to figure out how to add k keys instead of n keys
+
+        frequencyMap.keySet().forEach(key -> {
+            kQ.add(key);
+        });
+
+        // either heap size is smaller than k, then u an just add elements 
+        // heap size is = k , if element is not going to
+
+
+        // f = 4
+        // q. poll blah blah 
+
+        // 3,2 k = 2
+        while(k > 0){
+            result[k-1] = kQ.remove();
+            k--;
+        }
+
+        return result;
+    }
+
+    // need to start doing boundary edge cases or making assumptions. 
+    // assuming that each number appears a unique amount of times 
+    // k is in the range [1, the number of unique elements in the array]
+
+
+    //k log n because i only add here max k keys to the queue
+    public static int[] topKFrequent2(int[] nums, int k){
+
+        if(nums == null ) throw new IllegalArgumentException("invalid array passed in :( ");
+
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        int[] result = new int[k];
+
+        for(int num : nums){
+            if(frequencyMap.containsKey(num)){
+                frequencyMap.put(num, frequencyMap.get(num) + 1);
+            } else {
+                frequencyMap.put(num, 1);
+            }
+        }
+        
+        // reverse a and b in the compare since maxHeap
+        PriorityQueue<Integer> kQ = new PriorityQueue<>((a,b) -> Integer.compare(frequencyMap.get(a), frequencyMap.get(b)));
+        
+        // need to figure out how to add k keys instead of n keys
+        // we add the key, and consistently poll to remove the key with lowest frequency, which is why compatator is a,b instead of b,a 
+    
+        //for the n log n, where we have n elements in the queue, we would reverse the comparator to be a max heap. 
+        
+        for(int key : frequencyMap.keySet()){
+            kQ.add(key);
+            
+            if(kQ.size() > k) kQ.poll();      
+        }
+        // either heap size is smaller than k, then u an just add elements 
+        // heap size is = k , if element is not going to
+
+        while(k > 0){
+            result[k-1] = kQ.remove();
+            k--;
+        }
+        return result;
     }
 
 }
