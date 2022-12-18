@@ -1,5 +1,8 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 /* interview prep arrays and hasing neetcode + structy + ctci */
 
@@ -7,6 +10,16 @@ public class arrays_hashing {
     
     public static void main(String[] args) {
     
+
+        String[] list = new String[6];
+        list[0] = "eat";
+        list[1] = "tea";
+        list[2] = "tan";
+        list[3] = "ate";
+        list[4] = "nat";
+        list[5] = "bat";
+
+        groupAnagrams(list);
     }
 
 
@@ -42,4 +55,49 @@ public class arrays_hashing {
         return true; 
     
     }
+
+
+    // group anagrams: https://leetcode.com/problems/group-anagrams/description/
+
+    public static List<List<String>> groupAnagrams(String[] strs){
+
+        // map each value to its corresponding sorted string in a hashmap. 
+        // in this way, we can simply add the corresponding list value for each key into our resultant list
+        Map<String, List<String>> anagramMap = new HashMap<>();
+        List<List<String>> result = new ArrayList<List<String>>();
+
+        // iterate through each string in the array, computing its sorted value. 
+
+        for(int i = 0; i < strs.length; i++){       
+            String sortedStr = sortHelper(strs[i]);
+
+            if(anagramMap.containsKey(sortedStr)){ //if the sorted value is in the string, then add the current string to the corresponding list value of the sorted string
+                List<String> anagramValues = anagramMap.get(sortedStr);
+                anagramValues.add(strs[i]);
+
+                anagramMap.put(sortedStr, anagramValues);
+
+                continue;
+            } 
+            anagramMap.put(sortedStr, new ArrayList<>(List.of(strs[i]))); // if sorted value is not in the string, add the sorted value with the current string that we are on 
+        }
+
+        anagramMap.entrySet().forEach(entry -> {  // iterate through each entry in our hashmap, and add each anagram list to our result
+            List<String> temp = entry.getValue();
+            result.add(temp);
+        });
+        
+        return result;
+    }
+
+    // sorts a string!
+    public static String sortHelper(String str){
+        char[] tempArr = str.toCharArray();
+        Arrays.sort(tempArr);
+
+        String tempStr = new String(tempArr);
+
+        return tempStr;
+    }
+
 }
