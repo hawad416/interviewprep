@@ -1,3 +1,11 @@
 - use a dummy node to easily help you return your resultant list. it also helps you avoid the edge case of your intiial empty list. reduces the need for special case code for empty linked list. can ignore the edgecase of inserting into an empty list. 
 
 - in a doubly linked list, the dummy node is helpful, because we no longer have to keep track of seperate pointers for the head or tail of the linked list
+
+- Floyds Tortoise & Hare Algorithm: we have two pointers, we shift the slow pointer by 1, and we shift the fast pointer by 2. if there is no cycle, then 
+the fast pointer will reach the end of the linked list first. However, if there
+is a cycle, then there will come a time when the slow pointer and fast pointer 
+meet due to the cycle. Why is that? Even thought the fast pointer is going twice as fast, we have to visualize it as a physcial cycle, where the fast pointer and the slow pointer both assume some integer position on the cycle and have a distance, d, between them. If we let n be the length of the cycle which can reach up to the amount of nodes in our linked list, then, within a single iteration of the loop, we can see that we are incrementing the slow pointer by 1
+and incrementing the fast pointer by 2. So suppose that the gap d = 10. then 
+at each iteration the slow pointer will add 1 to the gap (10 + 1), however the
+fast pointer will subtract 2 from the gap 10 + (1-2), eventually catching up to the slow pointer if there is a cycle!

@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class linked_lists {
     
     public static void main(String[] args) {
@@ -98,5 +101,46 @@ public class linked_lists {
         }
 
         return list3.next;
+    }
+
+
+    // linked list cycle : https://leetcode.com/problems/linked-list-cycle/description/
+    
+
+    // o(n) space where is the number of nodes in out linked list structure
+
+    public boolean hasCycle(ListNode head) {
+        Map<ListNode, Integer> nodeMap = new HashMap<>();
+
+        ListNode curr = head;
+
+        while(curr != null){
+            if(nodeMap.containsKey(curr)) return true; 
+
+            nodeMap.put(curr, 1);
+
+            curr = curr.next;
+        }
+
+        return false;  //no cycle. 
+    }
+
+    // o(1) space and O(n) time solution using Floyds Tortoise & Hare Technique
+    public boolean hasCycle1(ListNode head){
+
+        if(head == null) return false; 
+
+        ListNode slowPtr = head; 
+        ListNode fastPtr = head;
+
+        while(fastPtr.next != null){
+            slowPtr = slowPtr.next; 
+            fastPtr = fastPtr.next.next;
+
+            if(slowPtr.equals(fastPtr)) return true;
+        }
+
+        return false;
+
     }
 }
