@@ -105,23 +105,21 @@ public class linked_lists {
 
 
     // linked list cycle : https://leetcode.com/problems/linked-list-cycle/description/
-    
+
 
     // o(n) space where is the number of nodes in out linked list structure
 
     public boolean hasCycle(ListNode head) {
         Map<ListNode, Integer> nodeMap = new HashMap<>();
 
-        ListNode curr = head;
+         ListNode curr = head;
 
         while(curr != null){
             if(nodeMap.containsKey(curr)) return true; 
 
             nodeMap.put(curr, 1);
-
             curr = curr.next;
         }
-
         return false;  //no cycle. 
     }
 
@@ -139,8 +137,6 @@ public class linked_lists {
 
             if(slowPtr.equals(fastPtr)) return true;
         }
-
-        return false;
-
+       return false;
     }
 }
